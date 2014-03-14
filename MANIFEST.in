@@ -1,0 +1,4 @@
+include README.rst CHANGES.rst LICENSE NOTICE
+recursive-include doc *.py *.rst *.txt *.html *.css *.js *.png *.git *.jpg *.conf *.bat *.pdf *.docx Makefile
+recursive-include src/inkpy/tests *
+prune doc/_build
