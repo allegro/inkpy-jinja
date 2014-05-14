@@ -12,7 +12,7 @@ with open(os.path.join(current_dir, 'README.rst')) as readme_file:
         long_description = readme_file.read() + '\n' + changes_file.read()
 
 sys.path.insert(0, current_dir + os.sep + 'src')
-from inkpy import VERSION
+VERSION = ('0', '0', '2-alpha')
 release = ".".join(str(num) for num in VERSION)
 
 setup(
@@ -31,7 +31,7 @@ setup(
     package_dir={'': 'src'},
     zip_safe=False,  # because templates are loaded from file path
     install_requires=[
-        'django>=1.4.9',
+        'django>=1.4.13',
         'django_rq==0.4.5',
     ],
     classifiers=[

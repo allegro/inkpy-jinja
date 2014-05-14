@@ -16,8 +16,6 @@ from subprocess import call
 from django.conf import settings
 from django.template import Context, Template
 
-VERSION = ('0', '0', '1-alpha')
-
 
 class Error(Exception):
     pass
