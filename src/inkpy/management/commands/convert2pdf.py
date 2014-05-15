@@ -32,4 +32,3 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         api.run_async(options.get('source'), options.get('output'), {})
-
