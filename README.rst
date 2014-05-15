@@ -2,6 +2,14 @@
 InkPy
 =====
 
+
+.. image:: https://badge.fury.io/py/inkpy.svg
+    :target: http://badge.fury.io/py/inkpy
+
+.. image:: https://travis-ci.org/quamilek/InkPy.svg?branch=develop
+    :target: https://travis-ci.org/quamilek/InkPy
+
+
 Django app provide interface to fill Django style template in odt file, and
 additionally convert odt to pdf file. Can be run synchronously or asynchronously mode.
 
