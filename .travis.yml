@@ -2,4 +2,9 @@ language: python
 python:
   - "2.7"
 install:
+    - pip install flake8 --use-mirrors
     - pip install -e .
+before_script:
+    flake8 --statistics src/inkpy
+script:
+    python src/inkpy/tests.py -v
