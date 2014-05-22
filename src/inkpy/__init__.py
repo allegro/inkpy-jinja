@@ -146,8 +146,10 @@ class Converter(object):
         if not zipFilePath:
             zipFilePath = dirPath + ".zip"
         if not os.path.isdir(dirPath):
-            raise OSError("dirPath argument must point to a directory. "
-                "'%s' does not." % dirPath)
+            raise OSError(
+                "dirPath argument must point to a directory. "
+                "'%s' does not." % dirPath
+            )
         parentDir, dirToZip = os.path.split(dirPath)
 
         def trimPath(path):
@@ -156,7 +158,9 @@ class Converter(object):
             if parentDir:
                 archivePath = archivePath.replace(os.path.sep, "", 1)
             if not includeDirInZip:
-                archivePath = archivePath.replace(dirToZip + os.path.sep, "", 1)
+                archivePath = archivePath.replace(
+                    dirToZip + os.path.sep, "", 1
+                )
             return os.path.normcase(archivePath)
 
         outFile = zipfile.ZipFile(

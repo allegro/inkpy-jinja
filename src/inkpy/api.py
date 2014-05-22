@@ -7,13 +7,17 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import django_rq
+from django.conf import settings
 
 from inkpy import Converter
+from inkpy.utils import switch_language
 
 
 def generate_pdf(source_path, output_path, data):
     conv = Converter(source_path, output_path, data)
-    conv.convert()
+    lang_code = getattr(settings, 'GENERATED_DOCS_LOCALE', 'en')
+    with switch_language(lang_code):
+        conv.convert()
 
 
 def generate_pdf_async(source_path, output_path, data):
