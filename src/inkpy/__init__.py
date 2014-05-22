@@ -16,8 +16,6 @@ from subprocess import call
 from django.conf import settings
 from django.template import Context, Template
 
-VERSION = ('0', '0', '1-alpha')
-
 
 class Error(Exception):
     pass
@@ -159,7 +157,7 @@ class Converter(object):
                 archivePath = archivePath.replace(os.path.sep, "", 1)
             if not includeDirInZip:
                 archivePath = archivePath.replace(
-                    dirToZip + os.path.sep, "", 1
+                    dirToZip + os.path.sep, "", 1,
                 )
             return os.path.normcase(archivePath)
 
