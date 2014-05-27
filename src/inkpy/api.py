@@ -12,10 +12,9 @@ from inkpy import Converter
 from inkpy.utils import switch_language
 
 
-def generate_pdf(source_path, output_path, data, lang_code='en'):
-    conv = Converter(source_path, output_path, data)
-    with switch_language(lang_code):
-        conv.convert()
+def generate_pdf(source_path, output_path, data, lang_code):
+    conv = Converter(source_path, output_path, data, lang_code)
+    conv.convert()
 
 
 def generate_pdf_async(source_path, output_path, data):

@@ -16,6 +16,8 @@ from subprocess import call
 from django.conf import settings
 from django.template import Context, Template
 
+from inkpy.utils import switch_language
+
 
 class Error(Exception):
     pass
@@ -45,7 +47,7 @@ class Converter(object):
     :param data: The directory with data to fill template.
     """
 
-    def __init__(self, source_file, output_path, data):
+    def __init__(self, source_file, output_path, data, lang_code=None):
         if not os.path.exists(source_file):
             raise FileDoesNotExist()
         self.source_file = source_file
@@ -60,6 +62,9 @@ class Converter(object):
         self.data = data
         self.tmp_dir_master = settings.INKPY.get('tmp_dir', '/tmp/INKPY')
         self.tmp_dir = "{}/{}".format(self.tmp_dir_master, self.data['id'])
+        if not lang_code:
+            lang_code = getattr(settings, 'LANGUAGE_CODE').split('-')[0]
+        self.lang_code = lang_code
 
     def convert(self):
         self._convert()
@@ -112,7 +117,9 @@ class Converter(object):
     def _django_renderer(self, file_content):
         template = Template(file_content)
         context = Context(self.data)
-        return template.render(context)
+        with switch_language(self.lang_code):
+            rendered = template.render(context)
+        return rendered
 
     def zip_dir(self, dirPath=None, zipFilePath=None, includeDirInZip=True):
         """Create a zip archive from a directory.

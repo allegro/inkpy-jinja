@@ -1,0 +1,1 @@
+LANGUAGE_CODE = 'en-US'
