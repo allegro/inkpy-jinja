@@ -7,4 +7,4 @@ install:
 before_script:
     flake8 --statistics src/inkpy
 script:
-    python src/inkpy/tests.py -v
+    python src/inkpy/tests/tests.py -v

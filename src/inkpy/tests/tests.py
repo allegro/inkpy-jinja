@@ -12,7 +12,8 @@ import unittest
 
 import inkpy
 
-os.environ['DJANGO_SETTINGS_MODULE']='inkpy.tests.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'inkpy.tests.settings'
+
 
 class MockedConverter(inkpy.Converter):
     def __init__(self, source_file, output_path, data, lang_code=None):
@@ -29,7 +30,7 @@ class BaseTests(unittest.TestCase):
         source_file = output_path = 'unused_in_test'
         test_data = {
             'id': 'mocked-id',
-            'today': datetime.date(2014,5,31),
+            'today': datetime.date(2014, 5, 31),
         }
         converter = MockedConverter(source_file, output_path, test_data)
         file_content = "{{today}}"

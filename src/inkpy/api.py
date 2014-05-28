@@ -9,7 +9,6 @@ from __future__ import unicode_literals
 import django_rq
 
 from inkpy import Converter
-from inkpy.utils import switch_language
 
 
 def generate_pdf(source_path, output_path, data, lang_code):
