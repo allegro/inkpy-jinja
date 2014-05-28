@@ -1,1 +1,1 @@
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'en-us'
