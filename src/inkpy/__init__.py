@@ -45,6 +45,8 @@ class Converter(object):
     :param source_file: The source odt file path.
     :param output_path: The destination pdf file path.
     :param data: The directory with data to fill template.
+    :param lang_code: forces language during docs generation, if None then
+        django's *settings.LANGUAGE_CODE* is used.
     """
 
     def __init__(self, source_file, output_path, data, lang_code=None):
