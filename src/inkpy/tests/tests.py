@@ -5,7 +5,6 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from django.conf import settings
 import datetime
 import os
 import unittest
@@ -18,9 +17,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'inkpy.tests.settings'
 class MockedConverter(inkpy.Converter):
     def __init__(self, source_file, output_path, data, lang_code=None):
         self.data = data
-        if not lang_code:
-            lang_code = getattr(settings, 'LANGUAGE_CODE').split('-')[0]
-        self.lang_code = lang_code
+        self.set_lang(lang_code)
 
 
 class BaseTests(unittest.TestCase):

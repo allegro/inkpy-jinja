@@ -62,6 +62,9 @@ class Converter(object):
         self.data = data
         self.tmp_dir_master = settings.INKPY.get('tmp_dir', '/tmp/INKPY')
         self.tmp_dir = "{}/{}".format(self.tmp_dir_master, self.data['id'])
+        self.set_lang(lang_code)
+
+    def set_lang(self, lang_code):
         if not lang_code:
             lang_code = getattr(settings, 'LANGUAGE_CODE').split('-')[0]
         self.lang_code = lang_code
