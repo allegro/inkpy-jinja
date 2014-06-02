@@ -4,7 +4,10 @@ python:
 install:
     - pip install flake8 --use-mirrors
     - pip install -e .
+    - pip install coveralls
 before_script:
     flake8 --statistics src/inkpy
 script:
-    python src/inkpy/tests/tests.py -v
+  coverage run src/inkpy/tests/tests.py -v
+after_success:
+  coveralls

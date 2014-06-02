@@ -8,6 +8,11 @@ InkPy
 
 .. image:: https://travis-ci.org/quamilek/InkPy.svg?branch=develop
     :target: https://travis-ci.org/quamilek/InkPy
+    
+.. image:: https://coveralls.io/repos/quamilek/InkPy/badge.png
+  :target: https://coveralls.io/r/quamilek/InkPy
+
+
 
 
 Django app provide interface to fill Django style template in odt file, and
