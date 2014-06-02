@@ -11,8 +11,8 @@ import django_rq
 from inkpy import Converter
 
 
-def generate_pdf(source_path, output_path, data):
-    conv = Converter(source_path, output_path, data)
+def generate_pdf(source_path, output_path, data, lang_code):
+    conv = Converter(source_path, output_path, data, lang_code)
     conv.convert()
 
 

@@ -8,6 +8,6 @@ install:
 before_script:
     flake8 --statistics src/inkpy
 script:
-  coverage run src/inkpy/tests.py -v
+  coverage run src/inkpy/tests/tests.py -v
 after_success:
   coveralls
