@@ -1,6 +1,17 @@
 Change Log
 ----------
 
+0.1.0-alpha
+~~~~~~~~~~~
+
+Released on June 3, 2014
+
+This is the feature relese.
+
+* expanded generate_pdf function with locale param,
+* travis-ci support,
+
+
 0.0.2-alpha
 ~~~~~~~~~~~
 
