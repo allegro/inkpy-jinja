@@ -12,7 +12,7 @@ with open(os.path.join(current_dir, 'README.rst')) as readme_file:
         long_description = readme_file.read() + '\n' + changes_file.read()
 
 sys.path.insert(0, current_dir + os.sep + 'src')
-VERSION = ('0', '0', '2-alpha')
+VERSION = ('0', '1', '0-alpha')
 release = ".".join(str(num) for num in VERSION)
 
 setup(
