@@ -4,16 +4,16 @@ import os
 import sys
 from setuptools import setup, find_packages
 
-assert sys.version_info >= (2, 7), "Python 2.7+ required."
+assert sys.version_info >= (2, 7), 'Python 2.7+ required.'
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(current_dir, 'README.rst')) as readme_file:
     with open(os.path.join(current_dir, 'CHANGES.rst')) as changes_file:
         long_description = readme_file.read() + '\n' + changes_file.read()
 
-sys.path.insert(0, current_dir + os.sep + 'src')
-VERSION = ('0', '1', '0-alpha')
-release = ".".join(str(num) for num in VERSION)
+sys.path.insert(0, os.path.join(current_dir, 'src'))
+VERSION = ('0', '1', '0')
+release = '.'.join(str(num) for num in VERSION)
 
 setup(
     name='inkpy',
@@ -31,9 +31,15 @@ setup(
     package_dir={'': 'src'},
     zip_safe=False,  # because templates are loaded from file path
     install_requires=[
-        'django>=1.4.13',
-        'django_rq==0.4.5',
+        'django>=1.4.13,<1.9',
     ],
+    extras_require={
+        'async': ['django_rq==0.4.5', ],
+    },
+    tests_require=[
+        'tox',
+    ],
+    test_suite='tests.main',
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Framework :: Django",

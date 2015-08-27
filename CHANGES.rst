@@ -1,6 +1,14 @@
 Change Log
 ----------
 
+0.1.0
+~~~~~
+
+Released on TBA
+
+* test with various version of Django
+
+
 0.1.0-alpha
 ~~~~~~~~~~~
 
