@@ -1,13 +1,43 @@
+sudo: false
+
 language: python
+
 python:
-  - "2.7"
+  - 2.7
+  - 3.4
+
+env:
+  - DJANGO_VERSION=1.4.22
+  - DJANGO_VERSION=1.5.12
+  - DJANGO_VERSION=1.6.11
+  - DJANGO_VERSION=1.7.10
+  - DJANGO_VERSION=1.8.4
+
 install:
-    - pip install flake8 --use-mirrors
-    - pip install -e .
-    - pip install coveralls
+  - pip install flake8  --use-mirrors
+  - pip install Django==$DJANGO_VERSION --use-mirrors
+  - pip install coveralls
+
 before_script:
-    flake8 --statistics src/inkpy
+  - flake8 --statistics src/inkpy
+
 script:
-  coverage run --source=inkpy  --omit="*__init__*" src/inkpy/tests/tests.py -v
+  - coverage run --source=inkpy setup.py test
+
 after_success:
+  coverage report --source=inkpy  --omit="*__init__*" -m src/inkpy/*.py -v
   coveralls
+
+
+matrix:
+  exclude:
+    - python: 3.4
+      env: DJANGO_VERSION=1.4.22
+    - python: 3.4
+      env: DJANGO_VERSION=1.5.12
+    - python: 3.4
+      env: DJANGO_VERSION=1.6.11
+    - python: 2.7
+      env: DJANGO_VERSION=1.7.10
+    - python: 2.7
+      env: DJANGO_VERSION=1.8.4
