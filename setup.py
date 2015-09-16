@@ -31,10 +31,12 @@ setup(
     package_dir={'': 'src'},
     zip_safe=False,  # because templates are loaded from file path
     install_requires=[
+        'six',
         'django>=1.4.13,<1.9',
     ],
     extras_require={
         'async': ['django_rq==0.4.5', ],
+        'libre': ['unotools==0.3.3', ],
     },
     tests_require=[
         'tox',

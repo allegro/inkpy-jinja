@@ -8,7 +8,7 @@ InkPy
 
 .. image:: https://travis-ci.org/quamilek/InkPy.svg?branch=develop
     :target: https://travis-ci.org/quamilek/InkPy
-    
+
 .. image:: https://coveralls.io/repos/quamilek/InkPy/badge.png
   :target: https://coveralls.io/r/quamilek/InkPy
 
@@ -44,6 +44,13 @@ We need also to define the value in the configuration file, and add the applicat
 To install LibreOffice in Ubuntu use::
 
   $ sudo apt-get install libreoffice libreoffice-common openjdk-7-jre unoconv
+
+If you want use builtin backend for LibreOffice (``LibreOfficePDFBackend``) install extra packages::
+
+  $ sudo apt-get install libreoffice-script-provider-python uno-libs3 python3-uno
+  $ pip install inkpy[libre]
+
+.. note:: ``LibreOfficePDFBackend`` works only with Python 3.x and LibreOffice version 4.x.
 
 To run LibreOffice service use::
 
