@@ -1,9 +1,8 @@
-from subprocess import call
+import os
 import sys
+from subprocess import call
 
-from django.conf import settings
-
-from inkpy.backends.base import PDFBackend
+from inkpy_jinja.backends.base import PDFBackend
 
 
 class OdtToPdfScriptPathNotConfigured(Exception):
@@ -13,9 +12,10 @@ class OdtToPdfScriptPathNotConfigured(Exception):
 class ExternalRenderer(PDFBackend):
     def __init__(self, *args, **kwargs):
         super(ExternalRenderer, self).__init__(*args, **kwargs)
-        if not settings.INKPY.get('script_path'):
+        script_path = os.environ.get('INKPY_SCRIPT_PATH', None)
+        if not script_path:
             raise OdtToPdfScriptPathNotConfigured()
-        self.script_path = settings.INKPY.get('script_path')
+        self.script_path = script_path
 
     def render(self):
         call([

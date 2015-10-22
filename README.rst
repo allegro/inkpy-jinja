@@ -1,57 +1,50 @@
-=====
-InkPy
-=====
+===========
+inkpy_jinja
+===========
 
 
-.. image:: https://badge.fury.io/py/inkpy.svg
-    :target: http://badge.fury.io/py/inkpy
+.. image:: https://badge.fury.io/py/inkpy_jinja.svg
+    :target: http://badge.fury.io/py/inkpy_jinja
 
-.. image:: https://travis-ci.org/quamilek/InkPy.svg?branch=develop
-    :target: https://travis-ci.org/quamilek/InkPy
-
-.. image:: https://coveralls.io/repos/quamilek/InkPy/badge.png
-  :target: https://coveralls.io/r/quamilek/InkPy
+.. image:: https://badge.imagelayers.io/ar4s/inkpy_jinja:latest.svg
+    :target: https://imagelayers.io/?images=ar4s/inkpy_jinja:latest
 
 
-
-
-Django app provide interface to fill Django style template in odt file, and
-additionally convert odt to pdf file. Can be run synchronously or asynchronously mode.
-
+Module provide interface to fill template in odt file and convert odt to pdf file via LibreOffice.
 
 
 Configurations
 ~~~~~~~~~~~~~~
 
-This tool provide interface to fill Django style template in odt file.
-Your task is to provide a python script which takes 2 arguments:
-odt file path, and the path to save the file pdf.
-
-The recommended way is to use the services LibreOffice / OpenOffice.org,
-which provides conversion from odt file to pdf from the console or Python script.
-
-We recommend to use the library PyODConverter:  https://github.com/dieselpoweredkitten/pyodconverter
-
-We need also to define the value in the configuration file, and add the application to INSTALLED_APPS::
-
-    INKPY = {
-        'script_path': '/path/to/your/convert/script.py',
-        'tmp_dir': '/tmp/inkpy'
-    }
-    INSTALLED_APPS = INSTALLED_APPS + ['inkpy',]
-
-
 To install LibreOffice in Ubuntu use::
 
-  $ sudo apt-get install libreoffice libreoffice-common openjdk-7-jre unoconv
+  $ sudo apt-get install libreoffice-writer openjdk-7-jre unoconv
+  $ sudo apt-get install libreoffice-script-provider-python uno-libs3
 
-If you want use builtin backend for LibreOffice (``LibreOfficePDFBackend``) install extra packages::
-
-  $ sudo apt-get install libreoffice-script-provider-python uno-libs3 python3-uno
-  $ pip install inkpy[libre]
 
 .. note:: ``LibreOfficePDFBackend`` works only with Python 3.x and LibreOffice version 4.x.
 
-To run LibreOffice service use::
+To run LibreOffice as a service use::
 
   $ soffice --nologo --headless --nofirststartwizard --accept='socket,host=127.0.0.1,port=2002,tcpNoDelay=1;urp;StarOffice.Service'
+
+If you want use ``inkpy-jinja`` like service you must install ``rq`` and run following command::
+
+  $ RQ_REDIS_URL=redis://host:port rqworker queue_name
+
+
+where::
+  * ``host:port`` - connection pair to redis server,
+  * ``queue_name`` - name of queue.
+
+
+Docker installation (recommended)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Pull docker image::
+
+  $ docker pull inkpy ar4s/inkpy
+
+and run it::
+
+  $ docker run --net host ar4s/inkpy_jinja:latest

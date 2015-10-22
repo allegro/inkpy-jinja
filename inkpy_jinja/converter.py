@@ -1,23 +1,13 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import os
 import shutil
 import zipfile
 
-from django.conf import settings as django_settings
-from django.template import Context, Template
+from jinja2 import Template
 
-from inkpy.utils import switch_language
-from inkpy.backends.external_script import ExternalRenderer
+from inkpy_jinja.backends.external_script import ExternalRenderer
 
 
-settings = getattr(django_settings, 'INKPY', {})
+settings = {}
 
 
 class Error(Exception):
@@ -75,7 +65,7 @@ class Converter(object):
 
     def set_lang(self, lang_code):
         if not lang_code:
-            lang_code = getattr(django_settings, 'LANGUAGE_CODE').split('-')[0]
+            lang_code = getattr(settings, 'LANGUAGE_CODE', 'pl').split('-')[0]
         self.lang_code = lang_code
 
     def convert(self):
@@ -114,17 +104,15 @@ class Converter(object):
 
         def _render(file_name):
             with open(file_name, 'rb') as reader:
-                new_content = self._django_renderer(reader.read())
+                new_content = self._jinja_renderer(reader.read())
             with open(file_name, 'wb') as writer:
                 writer.write(new_content.encode("UTF-8"))
         _render(content_xml)
         _render(styles_xml)
 
-    def _django_renderer(self, file_content):
-        template = Template(file_content)
-        context = Context(self.data)
-        with switch_language(self.lang_code):
-            rendered = template.render(context)
+    def _jinja_renderer(self, file_content):
+        template = Template(file_content.decode('utf-8'))
+        rendered = template.render(**self.data)
         return rendered
 
     def zip_dir(self, dir_path=None, zip_file_path=None):

@@ -1,3 +1,4 @@
+import os
 import six
 import sys
 
@@ -8,7 +9,10 @@ if six.PY2:
 
 sys.path.append('/usr/lib/python3/dist-packages')
 
-from django.conf import settings
+LIBRE_OFFICE_CONNECTION_PAIR = (
+    os.environ.get('PDF_WORKER_LIBRE_HOST', '0.0.0.0'),
+    int(os.environ.get('PDF_WORKER_LIBRE_PORT', '2002')),
+)
 
 try:
     from unotools import Socket, connect
@@ -16,9 +20,10 @@ try:
     from unotools.unohelper import convert_path_to_url
 except:
     raise ImportError(
-        'unotools package must be installed. Run pip install inkpy[libre]'
+        'unotools package must be installed.'
+        ' Run pip install inkpy_jinja[libre]'
     )
-from inkpy.backends.base import PDFBackend
+from inkpy_jinja.backends.base import PDFBackend
 
 
 class LibreOfficeContext(object):
@@ -45,8 +50,6 @@ class LibreOfficeContext(object):
 
 class LibreOfficePDFBackend(PDFBackend):
     def render(self):
-        host, port = getattr(
-            settings, 'LIBRE_OFFICE_CONNECTION_PAIR', ('0.0.0.0', 2002)
-        )
+        host, port = LIBRE_OFFICE_CONNECTION_PAIR
         with LibreOfficeContext(host, port, self.input_path) as ctx:
             ctx.write(self.output_path)

@@ -1,55 +1,42 @@
 # -*- encoding: utf-8 -*-
+from setuptools import setup
 
-import os
-import sys
-from setuptools import setup, find_packages
-
-assert sys.version_info >= (2, 7), 'Python 2.7+ required.'
-
-current_dir = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(current_dir, 'README.rst')) as readme_file:
-    with open(os.path.join(current_dir, 'CHANGES.rst')) as changes_file:
-        long_description = readme_file.read() + '\n' + changes_file.read()
-
-sys.path.insert(0, os.path.join(current_dir, 'src'))
-VERSION = ('0', '1', '0')
-release = '.'.join(str(num) for num in VERSION)
+readme = open('README.rst').read()
+history = open('CHANGES.rst').read()
 
 setup(
-    name='inkpy',
-    version=release,  # release,
-    author='Kamil Warguła',
-    author_email='kwargula@gmail.com',
-    description="InkPy - provide tool to fill Django style template in odt file",
-    long_description=long_description,
-    url='https://github.com/quamilek/InkPy',
+    name='inkpy_jinja',
+    version='0.1.0',
+    author='Grupa Allegro Sp. z o.o. and Contributors',
+    author_email='pylabs@allegro.pl',
+    description='inkpy-jinja - it\'s fork of powerful library called InkPy',
+    long_description=readme + history,
+    url='https://github.com/allegro/inkpy-jinja',
     keywords='',
     platforms=['any'],
     license='Apache Software License v2.0',
-    packages=find_packages('src'),
+    packages=['inkpy_jinja'],
     include_package_data=True,
-    package_dir={'': 'src'},
-    zip_safe=False,  # because templates are loaded from file path
+    zip_safe=False,
     install_requires=[
-        'six',
-        'django>=1.4.13,<1.9',
+        'jinja2',
+        'unotools==0.3.3',
     ],
     extras_require={
-        'async': ['django_rq==0.4.5', ],
-        'libre': ['unotools==0.3.3', ],
+        'service': ['rq'],
     },
     tests_require=[
-        'tox',
+        'flake8',
     ],
     test_suite='tests.main',
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Framework :: Django",
-        "Intended Audience :: Developers",
+        'Development Status :: 4 - Beta',
+        'Framework :: Django',
+        'Intended Audience :: Developers',
         'Natural Language :: English',
-        "License :: OSI Approved :: BSD License",
-        "Operating System :: POSIX",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
+        'License :: OSI Approved :: Apache License',
+        'Operating System :: POSIX',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
     ]
 )
