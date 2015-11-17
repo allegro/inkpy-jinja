@@ -23,7 +23,7 @@ setup(
         'unotools==0.3.3',
     ],
     extras_require={
-        'service': ['rq'],
+        'service': ['rq', 'raven==5.8.1'],
     },
     tests_require=[
         'flake8',
