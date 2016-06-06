@@ -23,7 +23,7 @@ except:
         'unotools package must be installed.'
         ' Run pip install inkpy_jinja[libre]'
     )
-from inkpy_jinja.backends.base import PDFBackend
+from inkpy_jinja.backends.base import PDFBackend  # noqa
 
 
 class LibreOfficeContext(object):

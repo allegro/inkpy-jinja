@@ -2,7 +2,7 @@ import os
 import shutil
 import zipfile
 
-from jinja2 import Template
+from jinja2.sandbox import SandboxedEnvironment
 
 from inkpy_jinja.backends.external_script import ExternalRenderer
 
@@ -111,7 +111,8 @@ class Converter(object):
         _render(styles_xml)
 
     def _jinja_renderer(self, file_content):
-        template = Template(file_content.decode('utf-8'))
+        jinja_env = SandboxedEnvironment()
+        template = jinja_env.from_string(file_content.decode('utf-8'))
         rendered = template.render(**self.data)
         return rendered
 
