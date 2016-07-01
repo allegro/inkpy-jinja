@@ -2,12 +2,8 @@
 inkpy_jinja
 ===========
 
-
-.. image:: https://badge.fury.io/py/inkpy_jinja.svg
-    :target: http://badge.fury.io/py/inkpy_jinja
-
-.. image:: https://badge.imagelayers.io/ar4s/inkpy_jinja:latest.svg
-    :target: https://imagelayers.io/?images=ar4s/inkpy_jinja:latest
+.. image:: https://badge.imagelayers.io/allegr/inkpy_jinja:latest.svg
+    :target: https://imagelayers.io/?images=allegro/inkpy_jinja:latest
 
 
 Module provide interface to fill template in odt file and convert odt to pdf file via LibreOffice.
@@ -34,6 +30,7 @@ If you want use ``inkpy-jinja`` like service you must install ``rq`` and run fol
 
 
 where::
+
   * ``host:port`` - connection pair to redis server,
   * ``queue_name`` - name of queue.
 
@@ -43,8 +40,8 @@ Docker installation (recommended)
 
 Pull docker image::
 
-  $ docker pull inkpy ar4s/inkpy
+  $ docker pull inkpy allegro/inkpy
 
 and run it::
 
-  $ docker run --net host ar4s/inkpy_jinja:latest
+  $ docker run --net host allegro/inkpy:latest
